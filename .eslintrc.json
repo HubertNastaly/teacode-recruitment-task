@@ -36,6 +36,10 @@
             "error",
             "never"
         ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
         "react/react-in-jsx-scope": "off"
     },
     "settings": {
