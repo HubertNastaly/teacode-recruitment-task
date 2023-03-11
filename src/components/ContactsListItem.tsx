@@ -1,6 +1,6 @@
-import { Avatar, Checkbox, ListItem, ListItemAvatar, ListItemText } from "@mui/material"
-import styled from "styled-components"
-import { Contact } from "../types"
+import { Avatar, Checkbox, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import styled from 'styled-components'
+import { Contact } from '../types'
 
 interface Props {
   contact: Contact
@@ -8,7 +8,6 @@ interface Props {
 
 export const ContactsListItem = ({ contact }: Props) => (
   <ListItemStyled
-    key={contact.id}
     secondaryAction={<Checkbox edge="end"/>}
   >
     <ListItemAvatar>
