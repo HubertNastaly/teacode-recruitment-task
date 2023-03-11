@@ -1,32 +1,25 @@
-import { Contact } from '../types'
+import { useEffect, useState } from 'react'
+import { ApiContact, asContact, Contact } from '../types'
 
-const SAMPLE_CONTACTS: Contact[] = [
-  {
-    id: 1,
-    firstName: 'Suzie',
-    lastName: 'Kydd',
-    email: 'skydd0@prnewswire.com',
-    gender: 'Female',
-    avatar: 'https://robohash.org/fugiatautemodit.png?size=50x50&set=set1'
-  },
-  {
-    id: 2,
-    firstName: 'Finley',
-    lastName: 'Fenich',
-    email: 'ffenich1@spotify.com',
-    gender: 'Male',
-    avatar: 'https://robohash.org/doloribusaspernaturea.png?size=50x50&set=set1'
-  },
-  {
-    id: 3,
-    firstName: 'Jim',
-    lastName: 'Sedgemond',
-    email: 'jsedgemond2@chron.com',
-    gender: 'Male',
-    avatar: 'https://robohash.org/magniestporro.png?size=50x50&set=set1'
-  }
-]
+const CONTACTS_ENDPOINT = 'https://teacode-recruitment-challenge.s3.eu-central-1.amazonaws.com/users.json'
 
 export function useContacts() {
-  return SAMPLE_CONTACTS
+  const [contacts, setContacts] = useState<Contact[]>()
+
+  useEffect(() => {
+    async function fetchContacts() {
+      try {
+        const response = await fetch(CONTACTS_ENDPOINT)
+        if(response.ok) {
+          setContacts((await response.json() as ApiContact[]).map(asContact))
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchContacts()
+  }, [])
+
+  return { contacts }
 }
