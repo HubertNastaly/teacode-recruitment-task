@@ -1,39 +1,33 @@
-import { LinearProgress, List, Typography } from '@mui/material'
+import { List } from '@mui/material'
+import { useState } from 'react'
 import styled from 'styled-components'
-import { useContacts } from '../hooks/useContacts'
-import { ContactsListItem } from './ContactsListItem'
 
-export const ContactsList = () => {
-  const { contacts } = useContacts()
+import { ContactsListItem } from './ContactsListItem'
+import { Searchbar } from './Searchbar'
+import { Contact } from '../types'
+
+interface Props {
+  allContacts: Contact[]
+}
+
+export const ContactsList = ({ allContacts }: Props) => {
+  const [filteredContacts] = useState(allContacts)
 
   return (
-    <Container>
-      <Heading variant="h4">Contacts</Heading>
-      {!contacts ? (
-        <LinearProgress />
-      ) : (
-        <ListStyled>
-          {contacts.map(contact => (
-            <ContactsListItem
-              key={contact.id}
-              contact={contact}
-            />
-          ))}
-        </ListStyled>
-      )}
-    </Container>
+    <>
+      <Searchbar  />
+      <ListStyled>
+        {filteredContacts.map(contact => (
+          <ContactsListItem
+            key={contact.id}
+            contact={contact}
+          />
+        ))}
+      </ListStyled>
+    </>
   )
 }
 
-const Container = styled.div`
-  width: 100%;
-  max-width: 600px;
-`
-
 const ListStyled = styled(List)`
   width: 100%;
-`
-
-const Heading = styled(Typography)`
-  color: white;
 `
