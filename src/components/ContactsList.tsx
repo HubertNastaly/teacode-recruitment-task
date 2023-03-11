@@ -14,7 +14,8 @@ interface Props {
 }
 
 export const ContactsList = ({ allContacts }: Props) => {
-  const [filteredContacts, setFilteredContacts] = useState(allContacts)
+  const [checkedContacts, setCheckedContacts] = useState<Set<number>>(new Set())
+  const [filteredContacts, setFilteredContacts] = useState<Contact[]>(allContacts)
 
   const handleSearchChange = useCallback(
     debounce(
@@ -32,6 +33,19 @@ export const ContactsList = ({ allContacts }: Props) => {
     )
     , [])
 
+  const handleCheckChange = useCallback((contactId: number, checked: boolean) => {
+    setCheckedContacts(checkedContacts => {
+      const newCheckedContacts = new Set(checkedContacts)
+      if(checked) {
+        newCheckedContacts.add(contactId)
+      } else {
+        newCheckedContacts.delete(contactId)
+      }
+      console.log({ checkedContactIds: Array.from(newCheckedContacts) })
+      return newCheckedContacts
+    })
+  }, [setCheckedContacts])
+
   return (
     <>
       <Searchbar onChange={handleSearchChange} />
@@ -40,6 +54,8 @@ export const ContactsList = ({ allContacts }: Props) => {
           <ContactsListItem
             key={contact.id}
             contact={contact}
+            checked={checkedContacts.has(contact.id)}
+            onCheckChange={handleCheckChange}
           />
         ))}
       </ListStyled>
@@ -48,8 +64,8 @@ export const ContactsList = ({ allContacts }: Props) => {
 }
 
 function filterContacts(contacts: Contact[], searchText: string) {
-  return contacts.filter(({ firstName, lastName, email }) => {
-    return [firstName, lastName, email].some(text => text.toLowerCase().includes(searchText))
+  return contacts.filter(({ firstName, lastName }) => {
+    return [firstName, lastName].some(text => text.toLowerCase().includes(searchText))
   })
 }
 
