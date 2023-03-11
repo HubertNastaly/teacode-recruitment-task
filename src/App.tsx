@@ -1,6 +1,11 @@
+import { ContactsList } from "./components/ContactsList"
+import { Page } from "./components/Page"
+
 function App() {
   return (
-    <>Hello world</>
+    <Page>
+      <ContactsList />
+    </Page>
   )
 }
 
