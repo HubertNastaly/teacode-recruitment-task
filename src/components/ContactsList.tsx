@@ -1,6 +1,5 @@
 import { List } from '@mui/material'
 import { useCallback, useState } from 'react'
-import styled from 'styled-components'
 import debounce from 'lodash.debounce'
 
 import { ContactsListItem } from './ContactsListItem'
@@ -49,7 +48,7 @@ export const ContactsList = ({ allContacts }: Props) => {
   return (
     <>
       <Searchbar onChange={handleSearchChange} />
-      <ListStyled>
+      <List sx={{ width: '100%' }}>
         {filteredContacts.map(contact => (
           <ContactsListItem
             key={contact.id}
@@ -58,7 +57,7 @@ export const ContactsList = ({ allContacts }: Props) => {
             onCheckChange={handleCheckChange}
           />
         ))}
-      </ListStyled>
+      </List>
     </>
   )
 }
@@ -68,7 +67,3 @@ function filterContacts(contacts: Contact[], searchText: string) {
     return [firstName, lastName].some(text => text.toLowerCase().includes(searchText))
   })
 }
-
-const ListStyled = styled(List)`
-  width: 100%;
-`

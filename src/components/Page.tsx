@@ -1,12 +1,14 @@
-import styled from 'styled-components'
-import { colors } from '@mui/material'
+import { Container } from '@mui/material'
+import { ReactNode } from 'react'
 
-export const Page = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  padding-top: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: ${colors.lightBlue[500]};
-`
+interface Props {
+  children?: ReactNode
+}
+
+export const Page = ({ children }: Props) => {
+  return (
+    <Container sx={{ width: '100%', paddingTop: '80px' }} maxWidth={false}>
+      {children}
+    </Container>
+  )
+}

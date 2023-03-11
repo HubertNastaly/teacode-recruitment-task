@@ -1,6 +1,5 @@
-import { Avatar, Checkbox, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
+import { Avatar, Checkbox, colors, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
 import React from 'react'
-import styled from 'styled-components'
 import { Contact } from '../types'
 
 interface Props {
@@ -11,7 +10,8 @@ interface Props {
 
 export const ContactsListItemComponent = ({ contact, onCheckChange, checked }: Props) => {
   return (
-    <ListItemStyled
+    <ListItem
+      sx={{ bgcolor: colors.blue[50], width: '100%', marginBottom: '8px'}}
       secondaryAction={checked && <Checkbox edge="end" checked={true} />}
     >
       <ListItemButton onClick={() => onCheckChange(contact.id, !checked)}>
@@ -23,14 +23,9 @@ export const ContactsListItemComponent = ({ contact, onCheckChange, checked }: P
           secondary={contact.email}
         />
       </ListItemButton>
-    </ListItemStyled>
+    </ListItem>
   )
 }
 
 export const ContactsListItem = React.memo(ContactsListItemComponent)
 
-const ListItemStyled = styled(ListItem)`
-  margin-bottom: 8px;
-  width: 100%;
-  background-color: white;
-`

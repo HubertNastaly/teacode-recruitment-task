@@ -1,5 +1,4 @@
-import { LinearProgress, Typography } from '@mui/material'
-import styled from 'styled-components'
+import { Container, LinearProgress, Typography } from '@mui/material'
 import { ContactsList } from '../components/ContactsList'
 import { Page } from '../components/Page'
 import { useSortedContacts } from '../hooks/useSortedContacts'
@@ -9,8 +8,8 @@ export const ContactsListPage = () => {
 
   return (
     <Page>
-      <Container>
-        <Heading variant="h4">Contacts</Heading>
+      <Container sx={{ width: '100%' }} maxWidth='md'>
+        <Typography variant="h4" marginBottom={2}>Contacts</Typography>
         {!contacts ? (
           <LinearProgress />
         ) : (
@@ -20,14 +19,3 @@ export const ContactsListPage = () => {
     </Page>
   )
 }
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 600px;
-`
-
-const Heading = styled(Typography)`
-  color: white;
-`
-
-
