@@ -1,12 +1,7 @@
-import { ContactsList } from "./components/ContactsList"
-import { Page } from "./components/Page"
+import { ContactsListPage } from "./pages/ContactsListPage"
 
-function App() {
-  return (
-    <Page>
-      <ContactsList />
-    </Page>
-  )
+const App = () => {
+  return <ContactsListPage />
 }
 
 export default App
