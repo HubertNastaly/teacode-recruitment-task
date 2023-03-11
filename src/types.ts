@@ -1,9 +1,11 @@
+type Gender = 'Male' | 'Female'
+
 export interface Contact {
   id: number
   firstName: string
   lastName: string
   email: string
-  gender: 'Male' | 'Female'
+  gender: Gender
   avatar: string
 }
 
@@ -12,7 +14,7 @@ export interface ApiContact {
   first_name: string
   last_name: string
   email: string
-  gender: 'Male' | 'Female'
+  gender: Gender
   avatar: string
 }
 
