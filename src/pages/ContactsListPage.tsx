@@ -2,10 +2,10 @@ import { LinearProgress, Typography } from '@mui/material'
 import styled from 'styled-components'
 import { ContactsList } from '../components/ContactsList'
 import { Page } from '../components/Page'
-import { useContacts } from '../hooks/useContacts'
+import { useSortedContacts } from '../hooks/useSortedContacts'
 
 export const ContactsListPage = () => {
-  const { contacts } = useContacts()
+  const { contacts } = useSortedContacts()
 
   return (
     <Page>
